@@ -1,18 +1,17 @@
 # Makefile
-NAME        := dot
+NAME        := pathific
 VERSION     := $(shell grep -m 1 -o '[0-9][0-9.]\+' README.md)
 
 # Paths
 PREFIX      ?= /usr/local
 MANPREFIX   ?= $(PREFIX)/share/man
-DOCDIR      ?= $(PREFIX)/share/doc/dot
+DOCDIR      ?= $(PREFIX)/share/doc/pathific
 
 INSTALLDIR  := $(DESTDIR)$(PREFIX)
 MANPREFIX   := $(DESTDIR)$(MANPREFIX)
 DOCDIR      := $(DESTDIR)$(DOCDIR)
 
-DOTDIR      := $(HOME)/.dotfiles
-USERCONFDIR := $(HOME)/.config/dot
+USERCONFDIR := $(HOME)/.config/pathific
 
 # Operatios
 default: help
@@ -32,23 +31,22 @@ options:
 	@echo 'INSTALLDIR  = $(INSTALLDIR)'
 	@echo 'MANPREFIX   = $(MANPREFIX)'
 	@echo 'DOCDIR      = $(DOCDIR)'
-	@echo 'DOTDIR      = $(DOTDIR)'
 	@echo 'USERCONFDIR = $(USERCONFDIR)'
 
 copy-config:
 	@echo 'Copy the default configuration files to user config directory.'
 	@echo
 	install -d $(USERCONFDIR)
-	cp -i examples/dotrc --target-directory=$(USERCONFDIR)
+	cp -i examples/pathificrc --target-directory=$(USERCONFDIR)
 
 copy-local-config:
 	@echo 'Copy the default local configuration files to user config directory.'
 	@echo
 	install -d $(USERCONFDIR)
-	cp -i examples/dotrc.local examples/dotlink.local --target-directory=$(USERCONFDIR)
+	cp -i examples/pathificrc.local examples/Pathfile.local --target-directory=$(USERCONFDIR)
 
 man:
-	pod2man --stderr -center='dot manual' --date='$(NAME)-$(VERSION)' \
-	    --release=$(shell date +%x) doc/dot.pod doc/dot.1
+	pod2man --stderr -center='pathific manual' --date='$(NAME)-$(VERSION)' \
+	    --release=$(shell date +%x) doc/pathific.pod doc/pathific.1
 
 .PHONY: default help options copy-config copy-local-config man

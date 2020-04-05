@@ -1,5 +1,5 @@
-# vim: ft=sh
-dot_set() {
+# vim: ft=zsh
+_set() {
   # option handling
   local arg
   local dotset_ignore=false
@@ -152,7 +152,7 @@ dot_set() {
     return 0
   } #}}}
 
-  _dot_set() { #{{{
+  __set() { #{{{
     local dotfile orig
     dotfile="$1"
     orig="$2"
@@ -181,7 +181,7 @@ dot_set() {
 
   } #}}}
 
-  parse_linkfiles _dot_set
+  parse_linkfiles __set
 
-  unset -f check_dir if_islink if_exist _dot_set replace replace_and_backup $0
+  unset -f check_dir if_islink if_exist __set replace replace_and_backup $0
 }
